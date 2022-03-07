@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CutiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProjectController;
 
@@ -20,8 +21,11 @@ Route::get('/', function () {
 
 
 Route::resource('projects', ProjectController::class);
+Route::resource('cuti', CutiController::class);
 
+Route::get('totalcuti', [CutiController::class,'sumCuti']);
 Route::get('pertamajoin', [ProjectController::class,'join']);
 Route::get('daftarcuti', [ProjectController::class,'daftarCuti']);
 Route::get('cutibanyak', [ProjectController::class,'cutiBanyak']);
+Route::get('hapus/{id_santri}', [ProjectController::class, 'hapusdata']);
 // Route::get('jenisPasien',[ShoppingReport::class, 'jp']);

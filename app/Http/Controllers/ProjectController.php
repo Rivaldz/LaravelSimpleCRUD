@@ -16,8 +16,17 @@ class ProjectController extends Controller
     public function index()
     {
         $karyawans = karyawan::all();
+        // $karyawans = DB::table('karyawans')->orderBy('tanggal_bergabung', 'asc')->limit(3)->get();
 
         return view('projects.index', compact('karyawans'));
+    }
+
+    public function hapusdata($id)
+    {
+        $santri = karyawan::where('id', $id)
+            ->delete();
+
+        return redirect()->route('projects.index');
     }
 
     public function join()
