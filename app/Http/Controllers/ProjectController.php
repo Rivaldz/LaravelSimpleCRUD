@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\karyawan;
+use App\Models\tipecuti;
 use Illuminate\Http\Request;
 use DB;
 
@@ -46,9 +47,12 @@ class ProjectController extends Controller
     public function cutiBanyak()
     {
         $data = DB::table('karyawans')
-            ->join('tipecutis', 'tipecutis.id_karyawan', '=', 'karyawans.id')
+            ->select('karyawans.*', 'tipecutis.*')
+            ->selectRaw('count(tipecutis.id_karyawan) as pengajuan')
+            ->leftJoin('tipecutis', 'tipecutis.id_karyawan', '=', 'karyawans.id')
+            ->groupBy('karyawans.id')
             ->get();
-
+        // dd($data);
         return view('projects.cutibanyak', compact('data'));
     }
 
@@ -87,7 +91,7 @@ class ProjectController extends Controller
         karyawan::create($request->all());
 
         return redirect()->route('projects.index')
-            ->with('success', 'Add Employe successfully.');
+            ->with('success', 'Add Employe Successfully.');
     }
 
 
@@ -126,17 +130,18 @@ class ProjectController extends Controller
             'tanggal_bergabung' => $request->tanggal_bergabung,
         ]);
         return redirect()->route('projects.index')
-            ->with('success', 'Project updated successfully');
+            ->with('success', 'Karyawan updated successfully');
     }
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Project  $project
+     * @param  \App\Models\Project
      * @return \Illuminate\Http\Response
      */
-    public function destroy(karyawan $project)
+    public function destroy(karyawan $karyawan)
     {
-        $project->delete();
+        $karyawan = karyawan::where('id', $karyawan);
+        $karyawan->delete();
 
         return redirect()->route('projects.index')
             ->with('success', 'Project deleted successfully');

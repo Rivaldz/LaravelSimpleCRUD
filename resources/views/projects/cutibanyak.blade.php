@@ -28,6 +28,7 @@
         <th>Nama</th>
         <th>Tanggal Cuti</th>
         <th>Keterangan</th>
+        <th>Pengajuan</th>
     </tr>
     @foreach ($data as $karyawan)
     @if($karyawan->lama_cuti > 1)
@@ -37,6 +38,7 @@
         <td>{{ $karyawan->nama }}</td>
         <td>{{ $karyawan->tanggal_cuti }}</td>
         <td>{{ $karyawan->keterangan}}</td>
+        <td>{{ $karyawan->pengajuan}}</td>
     </tr>
     @endif
     @endforeach

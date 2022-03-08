@@ -15,7 +15,10 @@ class CreateTipecutisTable extends Migration
     {
         Schema::create('tipecutis', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_karyawan')->constrained('karyawans');
+            $table->foreign('id_karyawan')
+                ->references('id')->on('karyawans')
+                ->onDelete('cascade');
+            // $table->foreignId('id_karyawan')->constrained('karyawans');
             $table->date('tanggal_cuti');
             $table->integer('lama_cuti');
             $table->string('keterangan');

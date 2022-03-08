@@ -50,7 +50,7 @@ class CutiController extends Controller
         ]);
         $show = tipecuti::create($validatedData);
 
-        return redirect('/cuti')->with('success', 'Game is successfully saved');
+        return redirect('/cuti')->with('success', 'Cuti is successfully saved');
     }
 
     /**

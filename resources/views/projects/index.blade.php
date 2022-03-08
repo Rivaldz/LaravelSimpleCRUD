@@ -50,8 +50,6 @@
                 <i class="fas fa-edit  fa-lg"></i>
             </a>
             <a href="hapus/{{$karyawan->id}}" onclick="return confirm('Apakah Anda Yakin Menghapus Data?');" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
-            <!-- <button type="submit" title="delete" style="border: none; background-color:transparent;">
-                <i class="fas fa-trash fa-lg text-danger"></i> -->
 
             </button>
         </td>

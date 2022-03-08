@@ -14,12 +14,6 @@
     </div>
 </div>
 
-@if ($message = Session::get('success'))
-<div class="alert alert-success">
-    <p>{{ $message }}</p>
-</div>
-@endif
-
 <table class="table table-bordered table-responsive-lg">
     <tr>
         <th>No</th>
@@ -29,9 +23,8 @@
         <th>Keterangan</th>
         <th>Total Cuti</th>
     </tr>
-    {{$temp = 0}}
-
     @foreach ($data as $karyawan)
+    @if($karyawan->total_cuti != null)
     <tr>
         <td scope="row">{{ $loop->iteration }}</td>
         <td>{{ $karyawan->no_induk }}</td>
@@ -40,6 +33,16 @@
         <td>{{ $karyawan->keterangan}}</td>
         <td>{{ $karyawan->total_cuti}}</td>
     </tr>
+    @else
+    <tr>
+        <td scope="row">{{ $loop->iteration }}</td>
+        <td>{{ $karyawan->no_induk }}</td>
+        <td>{{ $karyawan->nama }}</td>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+    </tr>
+    @endif
     @endforeach
 </table>
 @endsection
